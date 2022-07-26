@@ -1,0 +1,9 @@
+*.cfg
+*.zip
+*.txt
+*.iml
+*.xml
+Lib/
+Scripts/
+__pycache__/
+.idea
