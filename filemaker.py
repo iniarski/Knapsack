@@ -5,7 +5,7 @@ class FileMaker:
     def __init__(self, size):
         self.size = size
         self.filename = "packages" + str(size) + ".txt"
-        self.fileExists = os.path.exists(filename)
+        self.fileExists = os.path.exists(self.filename)
 
     # All the files have stritly defined form
     # 1st line : Data for sizexsize matrix
@@ -17,17 +17,16 @@ class FileMaker:
     # the Backpack class from pack.py works with .txt files in that form
 
     def makeFile(self):
-
         if not self.fileExists:
             with open(self.filename, 'w') as file:
-                file.write('Data for ' + str(self.size) + 'x' + str(self.size) + 'matrix')
-                file.write('id,width,height,value')
+                file.write('Data for ' + str(self.size) + 'x' + str(self.size) + 'matrix\n')
+                file.write('id,width,height,value\n')
 
                 packCount = int(self.size * self.size / 20 + randint(-20, 20))
 
                 for i in range(packCount):
-                    line = str(i + 1) + ',' + str(randint(1, 10)) + ',' + ...
-                    str(randint(1, 10)) + ',' + str(randint(1, 10))
+                    line = str(i + 1) + ',' + str(randint(1, 10)) + ',' + str(randint(1, 10)) + ',' + str(randint(1, 10)) +'\n'
+                    file.write(line)
 
                 file.close()
                 self.fileExists = False
@@ -43,7 +42,7 @@ class FileMaker:
 
         self.size = size
         self.filename = "packages" + str(size) + ".txt"
-        self.fileExists = os.path.exists(filename)
+        self.fileExists = os.path.exists(self.filename)
 
     def remakeFile(self):
         if self.fileExists:
