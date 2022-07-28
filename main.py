@@ -1,47 +1,39 @@
 import pack
+import filemaker
 import time
 
+def printSize(grd, grdTime, gen, genTime, size):
+    print('For', size, 'x', size, ' matrix', sep='')
+    print('The greedy algorith took:', grdTime, "s wit resut of ", grd)
+    print('The genetic algorith took:', genTime, "s wit resut of ", gen)
+    increse = ((gen / grd) - 1) * 100
+    print(increse, '% increse')
 
 def main():
-    # time complexity with regard to size
+
     greedyTimes = []
     greedy = []
     geneticTimes = []
     genetic = []
 
 
-    test = pack.Backpack('packages100.txt')
+    fm = filemaker.FileMaker(0)
+    size = 30
 
-    #for i in range(10):
-    #    start = time.time()
-    #    greedy.append(test.greedy())
-    #    greedyTimes.append(time.time() - start)
-
-    #    start = time.time()
-    #    genetic.append(test.genetic())
-    #    geneticTimes.append(time.time() - start)
-
-    #    print("Greedy")
-    #    print(greedy)
-    #    print(greedyTimes)
-
-    #    print("Genetic")
-    #    print(genetic)
-    #    print(geneticTimes)
-
-    pops = 2
-
-    for i in range(6):
-        test.pop = pops
+    for i in range(5):
         start = time.time()
-
+        fm.changeSize(size)
+        fm.makeFile()
+        test = pack.Backpack(fm.filename)
         genetic.append(test.genetic())
         geneticTimes.append(time.time() - start)
+        start = time.time()
+        greedy.append(test.greedy())
+        greedyTimes.append(time.time() - start)
 
-        pops *= 2
+        printSize(greedy[i], greedyTimes[i], genetic[i], geneticTimes[i], size)
 
-        print(genetic)
-        print(geneticTimes)
+        size *= 2
 
 if __name__ == '__main__':
     main()
