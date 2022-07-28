@@ -28,8 +28,8 @@ class FileMaker:
                     line = str(i + 1) + ',' + str(randint(1, 10)) + ',' + str(randint(1, 10)) + ',' + str(randint(1, 10)) +'\n'
                     file.write(line)
 
-                file.close()
-                self.fileExists = False
+            file.close()
+            self.fileExists = True
 
     def removeFile(self):
         if self.fileExists:
