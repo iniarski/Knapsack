@@ -28,8 +28,9 @@ class Backpack:
 
         # parameters
         self.noPrint = True
-
+        # number of instances per generation
         self.pop = 16
+        # number of generations
         self.gen = 8
 
     def greedy(self):
@@ -238,8 +239,18 @@ class Backpack:
                         else:
                             break
 
-                    obj.pop(ind)
                     packages.pop(ind)
+                    obj.pop(ind) 
+
+                    
+                    # if the package did not fit remove all the packages with greater or equal size
+                    if notin:
+                        for i in range(len(packages) - 1, -1, -1):
+                            p = packages[i]
+                            if self.packs[p][0] >= smal and self.packs[p][1] >= smal:
+                                if self.packs[p][0] >= bigg or self.packs[p][1] >= bigg:
+                                    packages.pop(i)
+                                    obj.pop(i) 
 
                 results.append(sum)
                 if not self.noPrint:
